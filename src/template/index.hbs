@@ -1,4 +1,21 @@
 {{> partials/html_head}}
+		<script id="formView" type="text/template">
+			<h2>New Product</h2>
+			<p>Name: <input type="text" id="name" name="name"/></p>
+			<p>Price: <input type="text" id="price" name="name"/></p>
+			<p><button>Create</button></p>
+		</script>
+		<script id="productView" type="text/template">
+			<p>Name: <%= name %></p>
+			<p>Price: <%= price %></p>
+		</script>
+		<script id="productsView" type="text/template">
+			<h2>Products</h2>
+		</script>
+		<script id="noProductsView" type="text/template">
+			<h2>No Products</h2>
+		</script>
+
 		<div class="wrapper">
 			<div class="wrapper-inner">
 				<header>
@@ -7,7 +24,10 @@
 
 				<div class="container">
 					<div class="row">
-						first container
+						<div id="form"></div>
+					</div>
+					<div class="row">
+						<div id="list"></div>
 					</div>
 				</div>
 

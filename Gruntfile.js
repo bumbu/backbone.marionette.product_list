@@ -123,12 +123,23 @@ module.exports = function(grunt) {
       }
     },
     copy: {
-      production: {
+      development: {
         files: [
-          {'<%= fruit.mockup %>/js/vendor/jquery.min.js': '<%= fruit.src %>/components/jquery/jquery.min.js'}
+          {'<%= fruit.mockup %>/js/vendor/jquery.js': '<%= fruit.src %>/components/jquery/jquery.js'}
         , {'<%= fruit.mockup %>/js/vendor/modernizr.js': '<%= fruit.src %>/components/modernizr/modernizr.js'}
-        , {'<%= fruit.mockup %>/js/vendor/backbone.min.js': '<%= fruit.src %>/components/backbone/backbone-min.js'}
-        , {'<%= fruit.mockup %>/js/vendor/backbone.marionette.min.js': '<%= fruit.src %>/components/marionette/lib/core/backbone.marionette.min.js'}
+        , {'<%= fruit.mockup %>/js/vendor/underscore.js': '<%= fruit.src %>/components/underscore/underscore.js'}
+        , {'<%= fruit.mockup %>/js/vendor/backbone.js': '<%= fruit.src %>/components/backbone/backbone.js'}
+        , {'<%= fruit.mockup %>/js/vendor/backbone.marionette.js': '<%= fruit.src %>/components/marionette/lib/backbone.marionette.js'}
+        // , {expand: true, cwd: '<%= fruit.mockup %>/css/fonts/', src: '**', dest: '<%= fruit.app %>/css/fonts/', filter: 'isFile'}
+        ]
+      }
+    , production: {
+        files: [
+          {'<%= fruit.mockup %>/js/vendor/jquery.js': '<%= fruit.src %>/components/jquery/jquery.min.js'}
+        , {'<%= fruit.mockup %>/js/vendor/modernizr.js': '<%= fruit.src %>/components/modernizr/modernizr.js'}
+        , {'<%= fruit.mockup %>/js/vendor/underscore.js': '<%= fruit.src %>/components/underscore/underscore-min.js'}
+        , {'<%= fruit.mockup %>/js/vendor/backbone.js': '<%= fruit.src %>/components/backbone/backbone-min.js'}
+        , {'<%= fruit.mockup %>/js/vendor/backbone.marionette.js': '<%= fruit.src %>/components/marionette/lib/backbone.marionette.min.js'}
         // , {expand: true, cwd: '<%= fruit.mockup %>/css/fonts/', src: '**', dest: '<%= fruit.app %>/css/fonts/', filter: 'isFile'}
         ]
       }
@@ -146,6 +157,7 @@ module.exports = function(grunt) {
   grunt.registerTask('server', [
     'stylus:development',
     'coffee:development',
+    'copy:development',
     'watch'
   ]);
 

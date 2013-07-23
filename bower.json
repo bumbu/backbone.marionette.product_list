@@ -1,0 +1,14 @@
+{
+  "name": "backbone-shop",
+  "version": "1.0.0",
+  "dependencies": {
+    "requirejs": "latest",
+    "modernizr": "latest",
+    "jquery": "latest",
+    "backbone-amd": "latest",
+    "underscore-amd": "latest",
+    "marionette": "latest",
+    "bootstrap": "latest"
+  },
+  "devDependencies": {}
+}

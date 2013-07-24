@@ -130,6 +130,7 @@ module.exports = function(grunt) {
         , {'<%= fruit.mockup %>/js/vendor/underscore.js': '<%= fruit.src %>/components/underscore/underscore.js'}
         , {'<%= fruit.mockup %>/js/vendor/backbone.js': '<%= fruit.src %>/components/backbone/backbone.js'}
         , {'<%= fruit.mockup %>/js/vendor/backbone.marionette.js': '<%= fruit.src %>/components/marionette/lib/backbone.marionette.js'}
+        , {'<%= fruit.mockup %>/js/vendor/backbone.localStorage.js': '<%= fruit.src %>/components/backbone.localStorage/backbone.localStorage.js'}
         // , {expand: true, cwd: '<%= fruit.mockup %>/css/fonts/', src: '**', dest: '<%= fruit.app %>/css/fonts/', filter: 'isFile'}
         ]
       }
@@ -140,6 +141,7 @@ module.exports = function(grunt) {
         , {'<%= fruit.mockup %>/js/vendor/underscore.js': '<%= fruit.src %>/components/underscore/underscore-min.js'}
         , {'<%= fruit.mockup %>/js/vendor/backbone.js': '<%= fruit.src %>/components/backbone/backbone-min.js'}
         , {'<%= fruit.mockup %>/js/vendor/backbone.marionette.js': '<%= fruit.src %>/components/marionette/lib/backbone.marionette.min.js'}
+        , {'<%= fruit.mockup %>/js/vendor/backbone.localStorage.js': '<%= fruit.src %>/components/backbone.localStorage/backbone.localStorage-min.js'}
         // , {expand: true, cwd: '<%= fruit.mockup %>/css/fonts/', src: '**', dest: '<%= fruit.app %>/css/fonts/', filter: 'isFile'}
         ]
       }

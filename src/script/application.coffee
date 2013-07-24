@@ -3,13 +3,26 @@ $ ->
 
 	ProductTracker = new Backbone.Marionette.Application()
 
+	# Use it as delete is used instead of destroy
+	LocalStorageEventsMap =
+		create: 'create'
+		read: 'read'
+		update: 'update'
+		delete: 'destroy'
+
 	Product = Backbone.Model.extend
 		defaults:
 			name: ''
 			price: 0
+			id_ordered: 0
+		sync: (method, model, options)->
+			console.log method, model, options
+			@collection.localStorage[LocalStorageEventsMap[method]](this)
 
 	Products = Backbone.Collection.extend
 		model: Product
+		localStorage: new Backbone.LocalStorage("ProductsStorage")
+
 	Totals = Backbone.Model.extend
 		defaults:
 			average: 0
@@ -27,7 +40,7 @@ $ ->
 				'count': @.get('count') - 1
 				'total': @.get('total') - value
 			@.set
-				'average': @.get('total') / @.get('count')
+				'average': if @.get('count') > 0 then @.get('total') / @.get('count') else 0
 
 	FormView = Backbone.Marionette.ItemView.extend
 		template: '#formView'
@@ -56,6 +69,7 @@ $ ->
 				@collection.add
 					name: @ui.name.val()
 					price: +@ui.price.val()
+				@collection.last().save()
 
 				ProductTracker.Totals.addValue @ui.price.val()
 
@@ -86,6 +100,8 @@ $ ->
 		emptyView: NoProductView
 		appendHtml: (collectionView, itemView)->
 			collectionView.$("tbody").append itemView.el
+		initialize: ()->
+			ProductTracker.Products.fetch()
 
 	TotalsView = Backbone.Marionette.ItemView.extend
 		template: '#totalsView'

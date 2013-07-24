@@ -6,6 +6,7 @@
     "modernizr": "latest",
     "jquery": "latest",
     "backbone-amd": "latest",
+    "backbone.localStorage": "latest",
     "underscore-amd": "latest",
     "marionette": "latest",
     "bootstrap-stylus": "git://github.com/Acquisio/bootstrap-stylus.git"

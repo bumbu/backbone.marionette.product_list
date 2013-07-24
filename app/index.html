@@ -27,7 +27,6 @@
 <script id="productsView" type="text/template">
 	<thead>
 		<tr>
-			<th>#</th>
 			<th>Name</th>
 			<th>Price</th>
 			<th>Action</th>
@@ -37,13 +36,12 @@
 	</tbody>
 </script>
 <script id="productView" type="text/template">
-	<td>1</td>
 	<td><%= name %></td>
 	<td><%= price %></td>
 	<td><button class="btn btn-info btn-small" data-action="edit">Edit</button> <button class="btn btn-danger btn-small" data-action="remove">Remove</button></td>
 </script>
 <script id="noProductsView" type="text/template">
-		<td colspan="4"><h2>No Products</h2></td>
+		<td colspan="3"><h2>No Products</h2></td>
 </script>
 <script id="totalsView" type="text/template">
 	<p>Average price: <b><%= average %></b></p>
@@ -74,6 +72,7 @@
 		<script src="js/vendor/modernizr.js"></script>
 		<script src="js/vendor/underscore.js"></script>
 		<script src="js/vendor/backbone.js"></script>
+		<script src="js/vendor/backbone.localStorage.js"></script>
 		<script src="js/vendor/backbone.marionette.js"></script>
 		<script src="js/application.js"></script>
 	</body>

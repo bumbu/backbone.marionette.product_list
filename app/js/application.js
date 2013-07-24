@@ -1,15 +1,27 @@
 $(function() {
-  var FormView, NoProductView, Product, ProductTracker, ProductView, Products, ProductsView, Totals, TotalsView;
+  var FormView, LocalStorageEventsMap, NoProductView, Product, ProductTracker, ProductView, Products, ProductsView, Totals, TotalsView;
   console.log('js loaded');
   ProductTracker = new Backbone.Marionette.Application();
+  LocalStorageEventsMap = {
+    create: 'create',
+    read: 'read',
+    update: 'update',
+    "delete": 'destroy'
+  };
   Product = Backbone.Model.extend({
     defaults: {
       name: '',
-      price: 0
+      price: 0,
+      id_ordered: 0
+    },
+    sync: function(method, model, options) {
+      console.log(method, model, options);
+      return this.collection.localStorage[LocalStorageEventsMap[method]](this);
     }
   });
   Products = Backbone.Collection.extend({
-    model: Product
+    model: Product,
+    localStorage: new Backbone.LocalStorage("ProductsStorage")
   });
   Totals = Backbone.Model.extend({
     defaults: {
@@ -32,7 +44,7 @@ $(function() {
         'total': this.get('total') - value
       });
       return this.set({
-        'average': this.get('total') / this.get('count')
+        'average': this.get('count') > 0 ? this.get('total') / this.get('count') : 0
       });
     }
   });
@@ -68,6 +80,7 @@ $(function() {
           name: this.ui.name.val(),
           price: +this.ui.price.val()
         });
+        this.collection.last().save();
         ProductTracker.Totals.addValue(this.ui.price.val());
         this.ui.name.val('');
         return this.ui.price.val('');
@@ -101,6 +114,9 @@ $(function() {
     emptyView: NoProductView,
     appendHtml: function(collectionView, itemView) {
       return collectionView.$("tbody").append(itemView.el);
+    },
+    initialize: function() {
+      return ProductTracker.Products.fetch();
     }
   });
   TotalsView = Backbone.Marionette.ItemView.extend({

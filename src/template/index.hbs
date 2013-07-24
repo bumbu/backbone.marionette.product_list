@@ -1,58 +1,22 @@
 {{> partials/html_head}}
-		<script id="formView" type="text/template">
-			{{! <form> }}
-				<fieldset>
-					<legend>New Product</legend>
-					<label>Product name</label>
-					<input type="text" placeholder="Give it a name" id="name">
-					<label>Product price</label>
-					<input type="text" placeholder="Add a number value" id="price">
-					<div class="clearfix"></div>
-					<button class="btn">Create</button>
-				</fieldset>
-			{{! </form> }}
-		</script>
-		<script id="productsView" type="text/template">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>Name</th>
-					<th>Price</th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			<tbody>
-			</tbody>
-		</script>
-		<script id="productView" type="text/template">
-				<td>1</td>
-				<td><%= name %></td>
-				<td><%= price %></td>
-				<td></td>
-		</script>
-		<script id="noProductsView" type="text/template">
-				<td colspan="4"><h2>No Products</h2></td>
-		</script>
-		<script id="pricesView" type="text/template">
-			<p>Average price: <b><%= price_average %></b></p>
-			<p>Total price: <b><%= price_total %></b></p>
-		</script>
+	{{> partials/templates}}
 
-		<div class="container">
-			<div class="row">
-				<div id="form" class="span6"></div>
-			</div>
-			<div class="row">
-				<div class="span6">
-					<h2>Products List</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="span6" id="list-table">
-				</div>
-			</div>
-			<div class="row">
-				<div id="prices"></div>
+	<div class="container">
+		<div class="row">
+			<div id="form" class="span6"></div>
+		</div>
+		<div class="row">
+			<div class="span6">
+				<h2>Products List</h2>
 			</div>
 		</div>
+		<div class="row">
+			<div class="span6" id="list-table">
+			</div>
+		</div>
+		<div class="row">
+			<div class="span6" id="totals">
+			</div>
+		</div>
+	</div>
 {{> partials/html_footer}}

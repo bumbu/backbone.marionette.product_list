@@ -2,7 +2,12 @@ $(function() {
   var FormView, NoProductView, Product, ProductTracker, ProductView, Products, ProductsView, Totals, TotalsView;
   console.log('js loaded');
   ProductTracker = new Backbone.Marionette.Application();
-  Product = Backbone.Model.extend({});
+  Product = Backbone.Model.extend({
+    defaults: {
+      name: '',
+      price: 0
+    }
+  });
   Products = Backbone.Collection.extend({
     model: Product
   });
@@ -15,7 +20,7 @@ $(function() {
     addValue: function(value) {
       this.set({
         'count': this.get('count') + 1,
-        'total': this.get('total') + 1.0 * value
+        'total': this.get('total') + +value
       });
       return this.set({
         'average': this.get('total') / this.get('count')
@@ -40,14 +45,33 @@ $(function() {
       name: '#name',
       price: '#price'
     },
-    createNewProduct: function() {
-      this.collection.add({
-        name: this.ui.name.val(),
-        price: this.ui.price.val()
-      });
-      ProductTracker.Totals.addValue(this.ui.price.val());
-      this.ui.name.val('');
-      return this.ui.price.val('');
+    createNewProduct: function(ev) {
+      var errors;
+      ev.preventDefault();
+      errors = [];
+      if (!this.ui.name.val().length) {
+        errors.push({
+          name: 'name',
+          message: 'Please fill name field'
+        });
+      }
+      if (!this.ui.price.val() || /[^0-9]/.test(this.ui.price.val())) {
+        errors.push({
+          name: 'price',
+          message: 'Please fill price field with a number'
+        });
+      }
+      if (errors.length) {
+        return console.log('errors');
+      } else {
+        this.collection.add({
+          name: this.ui.name.val(),
+          price: +this.ui.price.val()
+        });
+        ProductTracker.Totals.addValue(this.ui.price.val());
+        this.ui.name.val('');
+        return this.ui.price.val('');
+      }
     }
   });
   ProductView = Backbone.Marionette.ItemView.extend({

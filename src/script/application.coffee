@@ -3,7 +3,11 @@ $ ->
 
 	ProductTracker = new Backbone.Marionette.Application()
 
-	Product = Backbone.Model.extend {}
+	Product = Backbone.Model.extend
+		defaults:
+			name: ''
+			price: 0
+
 	Products = Backbone.Collection.extend
 		model: Product
 	Totals = Backbone.Model.extend
@@ -12,15 +16,13 @@ $ ->
 			total: 0
 			count: 0 # items count
 		addValue: (value)->
-			# @total += value
 			@.set
 				'count': @.get('count') + 1
-				'total': @.get('total') + 1.0 * value # TODO remove hack that forces value to be number
-			# Set average last as set uses a hash
+				'total': @.get('total') + +value
+			# Compute average after total and count values are computed
 			@.set
 				'average': @.get('total') / @.get('count')
 		removeValue: (value)->
-			# @total -= value
 			@.set
 				'count': @.get('count') - 1
 				'total': @.get('total') - value
@@ -34,15 +36,31 @@ $ ->
 		ui:
 			name: '#name'
 			price: '#price'
-		createNewProduct: ()->
-			@collection.add
-				name: @ui.name.val()
-				price: @ui.price.val()
+		createNewProduct: (ev)->
+			ev.preventDefault()
 
-			ProductTracker.Totals.addValue @ui.price.val()
+			errors = []
+			if not @ui.name.val().length
+				errors.push
+					name: 'name'
+					message: 'Please fill name field'
+			if not @ui.price.val() || /[^0-9]/.test(@ui.price.val())
+				errors.push
+					name: 'price'
+					message: 'Please fill price field with a number'
 
-			@ui.name.val ''
-			@ui.price.val ''
+			if errors.length
+				console.log 'errors'
+				# TODO show visual warning
+			else
+				@collection.add
+					name: @ui.name.val()
+					price: +@ui.price.val()
+
+				ProductTracker.Totals.addValue @ui.price.val()
+
+				@ui.name.val ''
+				@ui.price.val ''
 
 	ProductView = Backbone.Marionette.ItemView.extend
 		template: '#productView'

@@ -32,18 +32,18 @@ $ ->
 			total: 0
 			count: 0 # items count
 		addValue: (value)->
-			@.set
-				'count': @.get('count') + 1
-				'total': @.get('total') + +value
+			@set
+				'count': @get('count') + 1
+				'total': @get('total') + +value
 			# Compute average after total and count values are computed
-			@.set
-				'average': @.get('total') / @.get('count')
+			@set
+				'average': @get('total') / @get('count')
 		removeValue: (value)->
-			@.set
-				'count': @.get('count') - 1
-				'total': @.get('total') - value
-			@.set
-				'average': if @.get('count') > 0 then @.get('total') / @.get('count') else 0
+			@set
+				'count': @get('count') - 1
+				'total': @get('total') - value
+			@set
+				'average': if @get('count') > 0 then @get('total') / @get('count') else 0
 
 	FormView = Backbone.Marionette.ItemView.extend
 		_state: 'create'
@@ -124,7 +124,7 @@ $ ->
 		modelEvents:
 			"change": "modelChanged"
 		modelChanged: ()->
-			@.render()
+			@render()
 
 	NoProductView = Backbone.Marionette.ItemView.extend
 		template: '#noProductsView'
@@ -146,7 +146,7 @@ $ ->
 		modelEvents:
 			"change": "modelChanged"
 		modelChanged: ()->
-			@.render()
+			@render()
 
 
 	ProductTracker.addRegions

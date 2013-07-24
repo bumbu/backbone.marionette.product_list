@@ -1,26 +1,30 @@
-# Backbone Shop Test
+# Backbone Marionette Products List Demo Application
 
-This is a test application
+This is a test application.
 
-## Files and Folders structure
+If you need only the result then open _app/index.html_
 
-* Grunt.js
-* package.json
-* README.md
-
-* _src_ - Front-end source
-* _src/components_ - Front-end components source
-* _app_ - Application
-* _test_ - Tests
+## Structure
+* Files
+ * Grunt.js
+ * package.json
+ * .bowerrc
+ * bower.json
+ * README.md
+* Folders
+ * _src_ - Front-end source
+ * _src/components_ - Front-end components source
+ * _app_ - Application
+ * _test_ - Tests
 
 ## Developing front-end
 
 1. install node.js
 *  cd to project folder
-*  run ```npm instal```
-*  install bower ```npm install -g bower```
-*  install components ```bower install```
-*  run ```grunt```
+*  run _npm instal_
+*  install bower _npm install -g bower_
+*  install components _bower install_
+*  run _grunt_
 
 Now you are in live development mode. Making any changes will compile automatically JS and CSS source.
 

@@ -1,5 +1,5 @@
 {
-  "name": "backbone-shop",
+  "name": "backbone.marionette.product_list",
   "version": "1.0.0",
   "dependencies": {
     "requirejs": "latest",

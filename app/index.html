@@ -12,48 +12,61 @@
 	<body>
 
 		<script id="formView" type="text/template">
-			<h2>New Product</h2>
-			<p>Name: <input type="text" id="name" name="name"/></p>
-			<p>Price: <input type="text" id="price" name="name"/></p>
-			<p><button>Create</button></p>
-		</script>
-		<script id="productView" type="text/template">
-			<p>Name: <%= name %></p>
-			<p>Price: <%= price %></p>
+			
+				<fieldset>
+					<legend>New Product</legend>
+					<label>Product name</label>
+					<input type="text" placeholder="Give it a name" id="name">
+					<label>Product price</label>
+					<input type="text" placeholder="Add a number value" id="price">
+					<div class="clearfix"></div>
+					<button class="btn">Create</button>
+				</fieldset>
+			
 		</script>
 		<script id="productsView" type="text/template">
-			<h2>Products</h2>
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</script>
+		<script id="productView" type="text/template">
+				<td>1</td>
+				<td><%= name %></td>
+				<td><%= price %></td>
+				<td></td>
 		</script>
 		<script id="noProductsView" type="text/template">
-			<h2>No Products</h2>
+				<td colspan="4"><h2>No Products</h2></td>
+		</script>
+		<script id="pricesView" type="text/template">
+			<p>Average price: <b><%= price_average %></b></p>
+			<p>Total price: <b><%= price_total %></b></p>
 		</script>
 
-		<div class="wrapper">
-			<div class="wrapper-inner">
-				<header>
-					header
-				</header>
-
-				<div class="container">
-					<div class="row">
-						<div id="form"></div>
-					</div>
-					<div class="row">
-						<div id="list"></div>
-					</div>
-				</div>
-
-				<div class="container">
-					<div class="row">
-						second container
-					</div>
+		<div class="container">
+			<div class="row">
+				<div id="form" class="span6"></div>
+			</div>
+			<div class="row">
+				<div class="span6">
+					<h2>Products List</h2>
 				</div>
 			</div>
+			<div class="row">
+				<div class="span6" id="list-table">
+				</div>
+			</div>
+			<div class="row">
+				<div id="prices"></div>
+			</div>
 		</div>
-
-		<footer>
-			footer
-		</footer>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="js/vendor/jquery.js"><\/script>')</script>
 		<script src="js/vendor/modernizr.js"></script>

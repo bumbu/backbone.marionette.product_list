@@ -7,14 +7,22 @@ $(function() {
     model: Product
   });
   ProductView = Backbone.Marionette.ItemView.extend({
-    template: '#productView'
+    template: '#productView',
+    tagName: 'tr'
   });
   NoProductView = Backbone.Marionette.ItemView.extend({
-    template: '#noProductsView'
+    template: '#noProductsView',
+    tagName: 'tr'
   });
-  ProductsView = Backbone.Marionette.CollectionView.extend({
+  ProductsView = Backbone.Marionette.CompositeView.extend({
+    tagName: "table",
+    className: "table table-striped",
+    template: "#productsView",
     itemView: ProductView,
-    emptyView: NoProductView
+    emptyView: NoProductView,
+    appendHtml: function(collectionView, itemView) {
+      return collectionView.$("tbody").append(itemView.el);
+    }
   });
   FormView = Backbone.Marionette.ItemView.extend({
     template: '#formView',
@@ -36,7 +44,7 @@ $(function() {
   });
   ProductTracker.addRegions({
     form: '#form',
-    list: '#list'
+    list: '#list-table'
   });
   ProductTracker.addInitializer(function() {
     ProductTracker.products = new Products();
@@ -47,5 +55,5 @@ $(function() {
       collection: ProductTracker.products
     }));
   });
-  ProductTracker.start();
+  return ProductTracker.start();
 });

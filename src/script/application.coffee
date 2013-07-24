@@ -9,13 +9,21 @@ $ ->
 
 	ProductView = Backbone.Marionette.ItemView.extend
 		template: '#productView'
+		tagName: 'tr'
 
 	NoProductView = Backbone.Marionette.ItemView.extend
 		template: '#noProductsView'
+		tagName: 'tr'
 
-	ProductsView = Backbone.Marionette.CollectionView.extend
+	ProductsView = Backbone.Marionette.CompositeView.extend
+		tagName: "table"
+		className: "table table-striped"
+		template: "#productsView"
 		itemView: ProductView
 		emptyView: NoProductView
+		appendHtml: (collectionView, itemView)->
+			collectionView.$("tbody").append itemView.el
+
 
 	FormView = Backbone.Marionette.ItemView.extend
 		template: '#formView'
@@ -34,7 +42,7 @@ $ ->
 
 	ProductTracker.addRegions
 		form: '#form'
-		list: '#list'
+		list: '#list-table'
 
 	ProductTracker.addInitializer ()->
 		ProductTracker.products = new Products()
@@ -45,9 +53,3 @@ $ ->
 			collection: ProductTracker.products
 
 	ProductTracker.start()
-
-
-
-
-	return
-

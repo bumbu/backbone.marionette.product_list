@@ -1,4 +1,4 @@
-define ['backbone', 'marionette'], (Backbone, Marionette)->
+define ['backbone', 'marionette', 'vent'], (Backbone, Marionette, vent)->
 	"use strict"
 
 	ButtonStates =
@@ -38,19 +38,19 @@ define ['backbone', 'marionette'], (Backbone, Marionette)->
 						price: +@ui.price.val()
 					@collection.last().save()
 
-					# ProductTracker.Totals.addValue @ui.price.val()
+					vent.trigger 'Totals.addValue', @ui.price.val()
 				else
 					# get the model
 					model = @collection.get @ui.id.val()
 					# Remove old prive
-					# ProductTracker.Totals.removeValue model.get 'price'
+					vent.trigger 'Totals.removeValue', model.get 'price'
 					# Save new values
 					model.set
 						name: @ui.name.val()
 						price: +@ui.price.val()
 					model.save()
 					# Add new price
-					# ProductTracker.Totals.addValue model.get 'price'
+					vent.trigger 'Totals.addValue', model.get 'price'
 
 				@ui.name.val ''
 				@ui.price.val ''

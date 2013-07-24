@@ -1,4 +1,4 @@
-define(['backbone', 'marionette', 'views/ProductView', 'views/NoProductView'], function(Backbone, Marionette, ProductView, NoProductView) {
+define(['backbone', 'marionette', 'vent', 'views/ProductView', 'views/NoProductView'], function(Backbone, Marionette, vent, ProductView, NoProductView) {
   'use strict';
   var ProductsView;
   return ProductsView = Backbone.Marionette.CompositeView.extend({
@@ -10,7 +10,9 @@ define(['backbone', 'marionette', 'views/ProductView', 'views/NoProductView'], f
     appendHtml: function(collectionView, itemView) {
       return collectionView.$("tbody").append(itemView.el);
     },
-    initialize: function() {}
+    initialize: function() {
+      return vent.trigger('Products.fetch');
+    }
   });
 });
 

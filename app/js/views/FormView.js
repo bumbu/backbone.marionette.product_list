@@ -1,4 +1,4 @@
-define(['backbone', 'marionette'], function(Backbone, Marionette) {
+define(['backbone', 'marionette', 'vent'], function(Backbone, Marionette, vent) {
   "use strict";
   var ButtonStates, FormView;
   ButtonStates = {
@@ -42,13 +42,16 @@ define(['backbone', 'marionette'], function(Backbone, Marionette) {
             price: +this.ui.price.val()
           });
           this.collection.last().save();
+          vent.trigger('Totals.addValue', this.ui.price.val());
         } else {
           model = this.collection.get(this.ui.id.val());
+          vent.trigger('Totals.removeValue', model.get('price'));
           model.set({
             name: this.ui.name.val(),
             price: +this.ui.price.val()
           });
           model.save();
+          vent.trigger('Totals.addValue', model.get('price'));
         }
         this.ui.name.val('');
         this.ui.price.val('');

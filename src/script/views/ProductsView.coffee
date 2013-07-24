@@ -1,4 +1,4 @@
-define ['backbone', 'marionette', 'views/ProductView', 'views/NoProductView'], (Backbone, Marionette, ProductView, NoProductView)->
+define ['backbone', 'marionette', 'vent', 'views/ProductView', 'views/NoProductView'], (Backbone, Marionette, vent, ProductView, NoProductView)->
 	'use strict'
 
 	ProductsView = Backbone.Marionette.CompositeView.extend
@@ -10,6 +10,4 @@ define ['backbone', 'marionette', 'views/ProductView', 'views/NoProductView'], (
 		appendHtml: (collectionView, itemView)->
 			collectionView.$("tbody").append itemView.el
 		initialize: ()->
-			# ProductTracker.Products.fetch()
-			# Send prices to Totals
-			# ProductTracker.Totals.addValue price for price in ProductTracker.Products.pluck 'price'
+			vent.trigger 'Products.fetch'

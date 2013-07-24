@@ -1,4 +1,4 @@
-define ['backbone', 'marionette'], (Backbone, Marionette)->
+define ['backbone', 'marionette', 'vent'], (Backbone, Marionette, vent)->
 	"use strict"
 
 	ProductView = Backbone.Marionette.ItemView.extend
@@ -9,17 +9,17 @@ define ['backbone', 'marionette'], (Backbone, Marionette)->
 			'click button[data-action="edit"]': 'editProduct'
 		removeProduct: ()->
 			# Remove value from Totals
-			# ProductTracker.Totals.removeValue @model.get 'price'
+			vent.trigger 'Totals.removeValue', @model.get 'price'
 			# TODO check if product now is not in editing mode
 			@model.destroy()
 		editProduct: ()->
 			# Set button state and form internal state
-			# ProductTracker.Form.setState 'edit'
+			vent.trigger 'Form.setState', 'edit'
 			# Set form id value
-			# ProductTracker.Form.ui.id.val @model.get 'id'
+			vent.trigger 'Form.set_ui_val', 'id', @model.get 'id'
 			# Set model values
-			# ProductTracker.Form.ui.name.val @model.get 'name'
-			# ProductTracker.Form.ui.price.val @model.get 'price'
+			vent.trigger 'Form.set_ui_val', 'name', @model.get 'name'
+			vent.trigger 'Form.set_ui_val', 'price', @model.get 'price'
 		modelEvents:
 			"change": "modelChanged"
 		modelChanged: ()->

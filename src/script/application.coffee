@@ -10,14 +10,17 @@ $ ->
 		update: 'update'
 		delete: 'destroy'
 
+	ButtonStates =
+		create: 'Create'
+		edit: 'Save'
+
 	Product = Backbone.Model.extend
 		defaults:
 			name: ''
 			price: 0
-			id_ordered: 0
 		sync: (method, model, options)->
-			console.log method, model, options
 			@collection.localStorage[LocalStorageEventsMap[method]](this)
+
 
 	Products = Backbone.Collection.extend
 		model: Product
@@ -43,12 +46,15 @@ $ ->
 				'average': if @.get('count') > 0 then @.get('total') / @.get('count') else 0
 
 	FormView = Backbone.Marionette.ItemView.extend
+		_state: 'create'
 		template: '#formView'
 		events:
 			'click button': 'createNewProduct'
 		ui:
 			name: '#name'
 			price: '#price'
+			id: '#id'
+			button: 'button'
 		createNewProduct: (ev)->
 			ev.preventDefault()
 
@@ -66,15 +72,35 @@ $ ->
 				console.log 'errors'
 				# TODO show visual warning
 			else
-				@collection.add
-					name: @ui.name.val()
-					price: +@ui.price.val()
-				@collection.last().save()
+				if @getState() is 'create'
+					@collection.add
+						name: @ui.name.val()
+						price: +@ui.price.val()
+					@collection.last().save()
 
-				ProductTracker.Totals.addValue @ui.price.val()
+					ProductTracker.Totals.addValue @ui.price.val()
+				else
+					# get the model
+					model = @collection.get @ui.id.val()
+					# Remove old prive
+					ProductTracker.Totals.removeValue model.get 'price'
+					# Save new values
+					model.set
+						name: @ui.name.val()
+						price: @ui.price.val()
+					model.save()
+					# Add new price
+					ProductTracker.Totals.addValue model.get 'price'
 
 				@ui.name.val ''
 				@ui.price.val ''
+				@ui.id.val ''
+				@setState 'create'
+		setState: (state)->
+			@_state = state
+			@ui.button.text ButtonStates[state]
+		getState: ()->
+			@_state
 
 	ProductView = Backbone.Marionette.ItemView.extend
 		template: '#productView'
@@ -83,10 +109,22 @@ $ ->
 			'click button[data-action="remove"]': 'removeProduct'
 			'click button[data-action="edit"]': 'editProduct'
 		removeProduct: ()->
+			# Remove value from Totals
 			ProductTracker.Totals.removeValue @model.get 'price'
+			# TODO check if product now is not in editing mode
 			@model.destroy()
 		editProduct: ()->
-			console.log 'edit'
+			# Set button state and form internal state
+			ProductTracker.Form.setState 'edit'
+			# Set form id value
+			ProductTracker.Form.ui.id.val @model.get 'id'
+			# Set model values
+			ProductTracker.Form.ui.name.val @model.get 'name'
+			ProductTracker.Form.ui.price.val @model.get 'price'
+		modelEvents:
+			"change": "modelChanged"
+		modelChanged: ()->
+			@.render()
 
 	NoProductView = Backbone.Marionette.ItemView.extend
 		template: '#noProductsView'
@@ -119,9 +157,10 @@ $ ->
 	ProductTracker.addInitializer ()->
 		ProductTracker.Products = new Products()
 		ProductTracker.Totals = new Totals()
-
-		ProductTracker.form.show new FormView
+		ProductTracker.Form = new FormView
 			collection: ProductTracker.Products
+
+		ProductTracker.form.show ProductTracker.Form
 		ProductTracker.list.show new ProductsView
 			collection: ProductTracker.Products
 		ProductTracker.totals.show new TotalsView

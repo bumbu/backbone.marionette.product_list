@@ -93,7 +93,7 @@ $(function() {
           ProductTracker.Totals.removeValue(model.get('price'));
           model.set({
             name: this.ui.name.val(),
-            price: this.ui.price.val()
+            price: +this.ui.price.val()
           });
           model.save();
           ProductTracker.Totals.addValue(model.get('price'));
@@ -150,7 +150,15 @@ $(function() {
       return collectionView.$("tbody").append(itemView.el);
     },
     initialize: function() {
-      return ProductTracker.Products.fetch();
+      var price, _i, _len, _ref, _results;
+      ProductTracker.Products.fetch();
+      _ref = ProductTracker.Products.pluck('price');
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        price = _ref[_i];
+        _results.push(ProductTracker.Totals.addValue(price));
+      }
+      return _results;
     }
   });
   TotalsView = Backbone.Marionette.ItemView.extend({

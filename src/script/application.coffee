@@ -87,7 +87,7 @@ $ ->
 					# Save new values
 					model.set
 						name: @ui.name.val()
-						price: @ui.price.val()
+						price: +@ui.price.val()
 					model.save()
 					# Add new price
 					ProductTracker.Totals.addValue model.get 'price'
@@ -140,6 +140,8 @@ $ ->
 			collectionView.$("tbody").append itemView.el
 		initialize: ()->
 			ProductTracker.Products.fetch()
+			# Send prices to Totals
+			ProductTracker.Totals.addValue price for price in ProductTracker.Products.pluck 'price'
 
 	TotalsView = Backbone.Marionette.ItemView.extend
 		template: '#totalsView'

@@ -47,3 +47,4 @@ Before commiting changes run ```grunt build```. This command will compile, minif
 * Build requirejs modules (r.js??)
 * Finish all incode TODOs
 * Implement localStorage sync in Backbone maner
+* Add visual validation

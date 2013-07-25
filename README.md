@@ -42,6 +42,9 @@ Before commiting changes run ```grunt build```. This command will compile, minif
 * localStorage
 * Wreqr
 
+## Screenshot
+![screenshot 1](http://bumbu.github.io/backbone.marionette.product_list/media/screenshot_1.png)
+
 ## TODO
 * Minimize all JS for production version
 * Build requirejs modules (r.js??)

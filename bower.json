@@ -2,14 +2,14 @@
   "name": "backbone.marionette.product_list",
   "version": "1.0.0",
   "dependencies": {
-    "requirejs": "latest",
-    "modernizr": "latest",
-    "jquery": "latest",
-    "backbone-amd": "latest",
-    "backbone.localStorage": "latest",
-    "underscore-amd": "latest",
-    "marionette": "latest",
-    "bootstrap-stylus": "git://github.com/Acquisio/bootstrap-stylus.git"
+    "requirejs": "~2.1.8",
+    "modernizr": "~2.6.2",
+    "jquery": "~2.0.3",
+    "backbone-amd": "~1.0.0",
+    "backbone.localStorage": "~1.1.6",
+    "underscore-amd": "~1.5.1",
+    "marionette": "~1.0.4",
+    "bootstrap-stylus": "~2.3.2"
   },
   "devDependencies": {}
 }

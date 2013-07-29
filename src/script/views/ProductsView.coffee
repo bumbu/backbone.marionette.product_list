@@ -1,7 +1,7 @@
-define ['backbone', 'marionette', 'vent', 'views/ProductView', 'views/NoProductView'], (Backbone, Marionette, vent, ProductView, NoProductView)->
+define ['marionette', 'vent', 'views/ProductView', 'views/NoProductView'], (Marionette, vent, ProductView, NoProductView)->
 	'use strict'
 
-	ProductsView = Backbone.Marionette.CompositeView.extend
+	ProductsView = Marionette.CompositeView.extend
 		tagName: "table"
 		className: "table table-striped"
 		template: "#productsView"

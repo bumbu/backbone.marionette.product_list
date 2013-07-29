@@ -27,10 +27,10 @@ require.config({
   deps: ['jquery', 'underscore']
 });
 
-require(['backbone', 'marionette', 'vent', 'collections/Products', 'models/Totals', 'views/FormView', 'views/ProductsView', 'views/TotalsView'], function(Backbone, Marionette, vent, Products, Totals, FormView, ProductsView, TotalsView) {
+require(['marionette', 'vent', 'collections/Products', 'models/Totals', 'views/FormView', 'views/ProductsView', 'views/TotalsView'], function(Marionette, vent, Products, Totals, FormView, ProductsView, TotalsView) {
   "use strict";
   var ProductTracker;
-  ProductTracker = new Backbone.Marionette.Application();
+  ProductTracker = new Marionette.Application();
   ProductTracker.addRegions({
     form: '#form',
     list: '#list-table',

@@ -1,11 +1,11 @@
-define ['backbone', 'marionette', 'vent'], (Backbone, Marionette, vent)->
+define ['marionette', 'vent'], (Marionette, vent)->
 	"use strict"
 
 	ButtonStates =
 		create: 'Create'
 		edit: 'Save'
 
-	FormView = Backbone.Marionette.ItemView.extend
+	FormView = Marionette.ItemView.extend
 		_state: 'create'
 		template: '#formView'
 		events:

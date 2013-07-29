@@ -1,7 +1,7 @@
-define ['backbone', 'marionette', 'vent'], (Backbone, Marionette, vent)->
+define ['marionette', 'vent'], (Marionette, vent)->
 	"use strict"
 
-	ProductView = Backbone.Marionette.ItemView.extend
+	ProductView = Marionette.ItemView.extend
 		template: '#productView'
 		tagName: 'tr'
 		events:

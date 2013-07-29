@@ -1,7 +1,7 @@
-define(['backbone', 'marionette', 'vent'], function(Backbone, Marionette, vent) {
+define(['marionette', 'vent'], function(Marionette, vent) {
   "use strict";
   var ProductView;
-  return ProductView = Backbone.Marionette.ItemView.extend({
+  return ProductView = Marionette.ItemView.extend({
     template: '#productView',
     tagName: 'tr',
     events: {

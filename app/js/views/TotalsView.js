@@ -1,7 +1,7 @@
-define(['backbone', 'marionette'], function(Backbone, Marionette) {
+define(['marionette'], function(Marionette) {
   'use strict';
   var TotalsView;
-  return TotalsView = Backbone.Marionette.ItemView.extend({
+  return TotalsView = Marionette.ItemView.extend({
     template: '#totalsView',
     modelEvents: {
       "change": "modelChanged"

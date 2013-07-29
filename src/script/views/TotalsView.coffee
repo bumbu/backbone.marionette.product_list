@@ -1,7 +1,7 @@
-define ['backbone', 'marionette'], (Backbone, Marionette)->
+define ['marionette'], (Marionette)->
 	'use strict'
 
-	TotalsView = Backbone.Marionette.ItemView.extend
+	TotalsView = Marionette.ItemView.extend
 		template: '#totalsView'
 		modelEvents:
 			"change": "modelChanged"

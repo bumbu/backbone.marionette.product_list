@@ -1,7 +1,7 @@
-define(['backbone', 'marionette'], function(Backbone, Marionette) {
+define(['marionette'], function(Marionette) {
   'use strict';
   var NoProductView;
-  return NoProductView = Backbone.Marionette.ItemView.extend({
+  return NoProductView = Marionette.ItemView.extend({
     template: '#noProductsView',
     tagName: 'tr'
   });

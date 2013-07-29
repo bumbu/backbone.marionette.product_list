@@ -1,6 +1,6 @@
-define ['backbone', 'marionette'], (Backbone, Marionette)->
+define ['marionette'], (Marionette)->
 	'use strict'
 
-	NoProductView = Backbone.Marionette.ItemView.extend
+	NoProductView = Marionette.ItemView.extend
 		template: '#noProductsView'
 		tagName: 'tr'

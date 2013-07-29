@@ -1,11 +1,11 @@
-define(['backbone', 'marionette', 'vent'], function(Backbone, Marionette, vent) {
+define(['marionette', 'vent'], function(Marionette, vent) {
   "use strict";
   var ButtonStates, FormView;
   ButtonStates = {
     create: 'Create',
     edit: 'Save'
   };
-  return FormView = Backbone.Marionette.ItemView.extend({
+  return FormView = Marionette.ItemView.extend({
     _state: 'create',
     template: '#formView',
     events: {

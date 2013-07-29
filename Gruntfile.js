@@ -93,9 +93,13 @@ module.exports = function(grunt) {
           bare: true,
           join: true
         },
-        files: {
-          '<%= fruit.mockup %>/js/application.js': '<%= fruit.src %>/script/*.coffee' // concat then compile into single file
-        }
+        files: [{
+          expand: true,
+          cwd: '<%= fruit.src %>/script/',
+          src: ['**/*.coffee'],
+          dest: '<%= fruit.mockup %>/js/',
+          ext: '.js'
+        }]
       }
     },
     template: {
@@ -139,12 +143,12 @@ module.exports = function(grunt) {
     , production: {
         files: [
           {'<%= fruit.mockup %>/js/vendor/require.js': '<%= fruit.src %>/components/requirejs/require.js'}
-        , {'<%= fruit.mockup %>/js/vendor/jquery.js': '<%= fruit.src %>/components/jquery/jquery.min.js'}
+        , {'<%= fruit.mockup %>/js/vendor/jquery.js': '<%= fruit.src %>/components/jquery/jquery.js'}
         , {'<%= fruit.mockup %>/js/vendor/modernizr.js': '<%= fruit.src %>/components/modernizr/modernizr.js'}
         , {'<%= fruit.mockup %>/js/vendor/underscore.js': '<%= fruit.src %>/components/underscore/underscore-min.js'}
-        , {'<%= fruit.mockup %>/js/vendor/backbone.js': '<%= fruit.src %>/components/backbone-amd/backbone-min.js'}
+        , {'<%= fruit.mockup %>/js/vendor/backbone.js': '<%= fruit.src %>/components/backbone-amd/backbone.js'}
         , {'<%= fruit.mockup %>/js/vendor/backbone.wreqr.js': '<%= fruit.src %>/components/backbone.wreqr/lib/amd/backbone.wreqr.min.js'}
-        , {'<%= fruit.mockup %>/js/vendor/backbone.marionette.js': '<%= fruit.src %>/components/marionette/lib/backbone.marionette.min.js'}
+        , {'<%= fruit.mockup %>/js/vendor/backbone.marionette.js': '<%= fruit.src %>/components/marionette/lib/backbone.marionette.js'}
         , {'<%= fruit.mockup %>/js/vendor/backbone.localStorage.js': '<%= fruit.src %>/components/backbone.localStorage/backbone.localStorage-min.js'}
         // , {expand: true, cwd: '<%= fruit.mockup %>/css/fonts/', src: '**', dest: '<%= fruit.app %>/css/fonts/', filter: 'isFile'}
         ]

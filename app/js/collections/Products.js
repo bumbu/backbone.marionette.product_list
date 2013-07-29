@@ -6,7 +6,3 @@ define(['backbone', 'models/Product', 'vendor/backbone.localStorage'], function(
     localStorage: new Backbone.LocalStorage("ProductsStorage")
   });
 });
-
-/*
-//@ sourceMappingURL=Products.js.map
-*/

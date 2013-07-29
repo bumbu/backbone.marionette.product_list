@@ -26,7 +26,3 @@ define(['backbone', 'marionette', 'vent'], function(Backbone, Marionette, vent) 
     }
   });
 });
-
-/*
-//@ sourceMappingURL=ProductView.js.map
-*/

@@ -68,7 +68,3 @@ define(['backbone', 'marionette', 'vent'], function(Backbone, Marionette, vent) 
     }
   });
 });
-
-/*
-//@ sourceMappingURL=FormView.js.map
-*/

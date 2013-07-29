@@ -78,7 +78,3 @@ require(['backbone', 'marionette', 'vent', 'collections/Products', 'models/Total
   });
   return ProductTracker.start();
 });
-
-define(['wreqr'], function(Wreqr) {
-  return new Wreqr.EventAggregator();
-});

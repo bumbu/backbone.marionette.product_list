@@ -17,7 +17,3 @@ define(['backbone'], function(Backbone) {
     }
   });
 });
-
-/*
-//@ sourceMappingURL=Product.js.map
-*/

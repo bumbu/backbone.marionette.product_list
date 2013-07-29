@@ -27,7 +27,3 @@ define(['backbone'], function(Backbone) {
     }
   });
 });
-
-/*
-//@ sourceMappingURL=Totals.js.map
-*/

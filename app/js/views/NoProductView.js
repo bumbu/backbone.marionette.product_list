@@ -6,7 +6,3 @@ define(['backbone', 'marionette'], function(Backbone, Marionette) {
     tagName: 'tr'
   });
 });
-
-/*
-//@ sourceMappingURL=NoProductView.js.map
-*/

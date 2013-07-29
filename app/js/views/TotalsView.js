@@ -11,7 +11,3 @@ define(['backbone', 'marionette'], function(Backbone, Marionette) {
     }
   });
 });
-
-/*
-//@ sourceMappingURL=TotalsView.js.map
-*/

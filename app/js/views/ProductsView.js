@@ -15,7 +15,3 @@ define(['backbone', 'marionette', 'vent', 'views/ProductView', 'views/NoProductV
     }
   });
 });
-
-/*
-//@ sourceMappingURL=ProductsView.js.map
-*/
